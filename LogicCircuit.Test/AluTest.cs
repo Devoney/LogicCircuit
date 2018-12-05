@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using LogicCircuit.Abstractions.ALU;
 using LogicCircuit.Alu;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

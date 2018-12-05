@@ -1,7 +1,7 @@
 ﻿using LogicCircuit.Alu;
 using LogicCircuit.Infrastructure;
 
-namespace LogicCircuit.Abstractions.ALU
+namespace LogicCircuit.Alu
 {
     /// <summary>
     /// This class creates its circuits depending on constructor arguments.

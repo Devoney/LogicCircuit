@@ -1,11 +1,7 @@
-﻿using LogicCircuit.Abstractions.ALU;
-using LogicCircuit.Infrastructure;
+﻿using LogicCircuit.Infrastructure;
 
 namespace LogicCircuit.Alu
 {
-    /// <summary>
-    /// Use the AdderFactory to construct an Adder
-    /// </summary>
     public class Adder8Bit
     {
         private readonly FullAdder fullAdder1 = new FullAdder();

@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstractions\ALU\DynamicAdder.cs" />
+    <Compile Include="Alu\DynamicAdder.cs" />
     <Compile Include="Abstractions\Gates\IInput2Output1.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate1Input.cs" />
