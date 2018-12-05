@@ -1,8 +1,9 @@
 ﻿using FluentAssertions;
-using LogicCircuit.Gates.Simple;
+using LogicCircuit.Abstractions.Infrastructure;
 using LogicCircuit.Infrastructure;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace LogicCircuit.Test.Utilities
 {
@@ -47,13 +48,13 @@ namespace LogicCircuit.Test.Utilities
             actualValue.Should().Be(expectedValue);
         }
 
-        private Pin GetPin(bool state = false)
+        private IPin GetPin(bool state = false)
         {
-            //TODO: Not so nice to have to construct a gate to get a pin.
-            //For testing would be nice to refactor, maybe introduce interfaces and mocks for this.
-            var not = new NOT();
-            not.InputA.State = state;
-            return not.InputA;
+            var pinMock = new Mock<IPin>();
+            pinMock.SetupProperty(p => p.State);
+            var pin = pinMock.Object;
+            pin.State = state;
+            return pin;
         }
     }
 }

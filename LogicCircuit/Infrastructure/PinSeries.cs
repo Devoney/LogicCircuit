@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using LogicCircuit.Abstractions.Infrastructure;
 
 namespace LogicCircuit.Infrastructure
 {
     public class PinSeries
     {
-        private readonly Pin[] pins;
+        private readonly IPin[] pins;
 
         public readonly int Length;
 
-        public PinSeries(params Pin[] pins)
+        public PinSeries(params IPin[] pins)
         {
             this.pins = pins;
             Length = pins.Length;

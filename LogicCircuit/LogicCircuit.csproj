@@ -58,6 +58,7 @@
     <Compile Include="Gates\Composite\NOR.cs" />
     <Compile Include="Gates\Composite\XNOR.cs" />
     <Compile Include="Gates\Simple\AND.cs" />
+    <Compile Include="Abstractions\Infrastructure\IPin.cs" />
     <Compile Include="Infrastructure\Junction.cs" />
     <Compile Include="Gates\Simple\NOT.cs" />
     <Compile Include="Gates\Simple\OR.cs" />

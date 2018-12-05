@@ -1,9 +1,10 @@
 ﻿using LogicCircuit.Abstractions.Gates.Simple;
+using LogicCircuit.Abstractions.Infrastructure;
 using System;
 
 namespace LogicCircuit.Infrastructure
 {
-    public class Pin
+    public class Pin : IPin
     {
         public event EventHandler StateChanged;
         public event EventHandler Connected;
