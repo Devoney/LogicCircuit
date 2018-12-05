@@ -78,12 +78,30 @@ namespace LogicCircuit.Test
             var adder = new Adder8Bit();
 
             //When
-            adder.InputA.Set(23);
-            adder.InputB.Set(56);
+            adder.InputA.Set(inputA);
+            adder.InputB.Set(inputB);
 
             //Then
             var actualSum = adder.Sum.Read();
             actualSum.Should().Be(expectedSum);
+            adder.Overflow.State.Should().BeFalse();
+        }
+
+        [TestMethod, TestCategory("ALU.Adder")]
+        public void EightBitAdderSetsOverflowHigh()
+        {
+            //Given
+            const int inputA = 128;
+            const int inputB = 128;
+
+            var adder = new Adder8Bit();
+
+            //When
+            adder.InputA.Set(inputA);
+            adder.InputB.Set(inputB);
+
+            //Then
+            adder.Overflow.State.Should().BeTrue();
         }
     }
 }

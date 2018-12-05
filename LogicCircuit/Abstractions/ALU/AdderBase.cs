@@ -8,10 +8,11 @@ namespace LogicCircuit.Abstractions.ALU
     {
         private readonly FullAdder[] fullAdders;
 
-        public PinSeries InputA { get; set; }
-        public PinSeries InputB { get; set; }
+        public PinSeries InputA { get; private set; }
+        public PinSeries InputB { get; private set; }
 
-        public PinSeries Sum { get; set; }
+        public PinSeries Sum { get; private set; }
+        public Pin Overflow { get; private set; }
 
         protected AdderBase(int bits)
         {
@@ -24,6 +25,10 @@ namespace LogicCircuit.Abstractions.ALU
             for (var i=bits-1; i >= 0; i--)
             {
                 var fullAdder = new FullAdder();
+                if(Overflow == null)
+                {
+                    Overflow = fullAdder.CarryOver;
+                }
 
                 if (previousFullAdder != null)
                 {
