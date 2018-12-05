@@ -60,6 +60,7 @@
     <Compile Include="AluTest.cs" />
     <Compile Include="Gates\CompositeTest.cs" />
     <Compile Include="Gates\SimpleTest.cs" />
+    <Compile Include="Utilities\IntPinSeriesConverterTest.cs" />
     <Compile Include="Input2Output1TruthTableTester.cs" />
     <Compile Include="TruthTable2.cs" />
     <Compile Include="TruthValue2.cs" />

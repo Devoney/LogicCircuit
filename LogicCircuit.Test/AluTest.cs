@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using LogicCircuit.Alu;
+using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,25 @@ namespace LogicCircuit.Test
                 fullAdder.Sum.State.Should().Be(t.Item4);
                 fullAdder.CarryOver.State.Should().Be(t.Item5);
             }
+        }
+
+        [TestMethod, TestCategory("ALU")]
+        public void EightBitAdderSumsCorrectly()
+        {
+            //Given
+            const int inputA = 23;
+            const int inputB = 56;
+            const int expectedSum = inputA + inputB;
+
+            var adder = new Adder8Bit();
+
+            //When
+            adder.InputA.Set(23);
+            adder.InputB.Set(56);
+
+            //Then
+            var actualSum = adder.Sum.Read();
+            actualSum.Should().Be(expectedSum);
         }
     }
 }
