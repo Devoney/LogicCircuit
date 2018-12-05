@@ -58,11 +58,11 @@
     <Compile Include="Gates\Composite\NOR.cs" />
     <Compile Include="Gates\Composite\XNOR.cs" />
     <Compile Include="Gates\Simple\AND.cs" />
-    <Compile Include="Junction.cs" />
+    <Compile Include="Infrastructure\Junction.cs" />
     <Compile Include="Gates\Simple\NOT.cs" />
     <Compile Include="Gates\Simple\OR.cs" />
-    <Compile Include="Pin.cs" />
-    <Compile Include="PinSeries.cs" />
+    <Compile Include="Infrastructure\Pin.cs" />
+    <Compile Include="Infrastructure\PinSeries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Gates\Composite\XOR.cs" />
     <Compile Include="Utilities\IntPinSeriesConverter.cs" />

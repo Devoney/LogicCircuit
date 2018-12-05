@@ -1,4 +1,5 @@
 ﻿using LogicCircuit.Alu;
+using LogicCircuit.Infrastructure;
 using System.Collections.Generic;
 
 namespace LogicCircuit.Abstractions.ALU

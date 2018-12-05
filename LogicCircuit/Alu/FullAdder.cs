@@ -1,4 +1,5 @@
 ﻿using LogicCircuit.Gates.Simple;
+using LogicCircuit.Infrastructure;
 
 namespace LogicCircuit.Alu
 {

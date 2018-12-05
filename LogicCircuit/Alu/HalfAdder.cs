@@ -1,5 +1,6 @@
 ﻿using LogicCircuit.Gates.Composite;
 using LogicCircuit.Gates.Simple;
+using LogicCircuit.Infrastructure;
 
 namespace LogicCircuit.Alu
 {

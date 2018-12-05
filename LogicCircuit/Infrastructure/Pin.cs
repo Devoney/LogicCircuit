@@ -1,7 +1,7 @@
 ﻿using LogicCircuit.Abstractions.Gates.Simple;
 using System;
 
-namespace LogicCircuit
+namespace LogicCircuit.Infrastructure
 {
     public class Pin
     {

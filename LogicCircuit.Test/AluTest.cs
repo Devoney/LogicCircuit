@@ -2,7 +2,6 @@
 using LogicCircuit.Alu;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using bool4 = System.Tuple<bool, bool, bool, bool>;
 using bool5 = System.Tuple<bool, bool, bool, bool, bool>;
@@ -12,7 +11,7 @@ namespace LogicCircuit.Test
     [TestClass]
     public class AluTest
     {
-        [TestMethod, TestCategory("ALU")]
+        [TestMethod, TestCategory("ALU.Adder")]
         public void HalfAdderSumsCorrectly()
         {
             //Given
@@ -37,7 +36,7 @@ namespace LogicCircuit.Test
             }
         }
 
-        [TestMethod, TestCategory("ALU")]
+        [TestMethod, TestCategory("ALU.Adder")]
         public void FullAdderSumsCorrectly()
         {
             //Given
@@ -68,7 +67,7 @@ namespace LogicCircuit.Test
             }
         }
 
-        [TestMethod, TestCategory("ALU")]
+        [TestMethod, TestCategory("ALU.Adder")]
         public void EightBitAdderSumsCorrectly()
         {
             //Given

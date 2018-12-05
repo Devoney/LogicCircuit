@@ -1,4 +1,6 @@
-﻿namespace LogicCircuit.Abstractions.Gates.Simple
+﻿using LogicCircuit.Infrastructure;
+
+namespace LogicCircuit.Abstractions.Gates.Simple
 {
     public abstract class Gate2Input : Gate1Input, IInput2Output1
     {

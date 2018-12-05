@@ -1,4 +1,6 @@
-﻿namespace LogicCircuit.Abstractions.Gates
+﻿using LogicCircuit.Infrastructure;
+
+namespace LogicCircuit.Abstractions.Gates
 {
     public interface IInput2Output1
     {

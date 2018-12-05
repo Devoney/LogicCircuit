@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using LogicCircuit.Gates.Simple;
+using LogicCircuit.Infrastructure;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,7 +9,7 @@ namespace LogicCircuit.Test.Utilities
     [TestClass]
     public class IntPinSeriesConverterTest
     {
-        [TestMethod, TestCategory("Utilities")]
+        [TestMethod, TestCategory("Utilities.Conversion")]
         public void IntConvertsToPinSeriesCorrectly()
         {
             //Given
@@ -29,7 +30,7 @@ namespace LogicCircuit.Test.Utilities
             pinSeries[7].Should().BeFalse();
         }
 
-        [TestMethod, TestCategory("Utilities")]
+        [TestMethod, TestCategory("Utilities.Conversion")]
         public void PinSeriesConvertsToIntCorrectly()
         {
             //Given

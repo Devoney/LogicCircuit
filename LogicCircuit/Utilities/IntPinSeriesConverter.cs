@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicCircuit.Infrastructure;
+using System;
 using System.Collections;
 
 namespace LogicCircuit.Utilities

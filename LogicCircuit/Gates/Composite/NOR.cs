@@ -1,5 +1,6 @@
 ﻿using LogicCircuit.Abstractions.Gates;
 using LogicCircuit.Gates.Simple;
+using LogicCircuit.Infrastructure;
 
 namespace LogicCircuit.Gates.Composite
 {

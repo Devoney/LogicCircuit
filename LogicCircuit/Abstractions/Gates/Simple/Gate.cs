@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicCircuit.Infrastructure;
+using System;
 
 namespace LogicCircuit.Abstractions.Gates.Simple
 {
