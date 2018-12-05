@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using LogicCircuit.Abstractions.ALU;
 using LogicCircuit.Alu;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -95,6 +96,43 @@ namespace LogicCircuit.Test
             const int inputB = 128;
 
             var adder = new Adder8Bit();
+
+            //When
+            adder.InputA.Set(inputA);
+            adder.InputB.Set(inputB);
+
+            //Then
+            adder.Overflow.State.Should().BeTrue();
+        }
+
+        [TestMethod, TestCategory("ALU.Adder")]
+        public void DynamicAdderSumsCorrectly()
+        {
+            //Given
+            const int inputA = 23;
+            const int inputB = 56;
+            const int expectedSum = inputA + inputB;
+
+            var adder = new DynamicAdder(8);
+
+            //When
+            adder.InputA.Set(inputA);
+            adder.InputB.Set(inputB);
+
+            //Then
+            var actualSum = adder.Sum.Read();
+            actualSum.Should().Be(expectedSum);
+            adder.Overflow.State.Should().BeFalse();
+        }
+
+        [TestMethod, TestCategory("ALU.Adder")]
+        public void DynamicAdderSetsOverflowHigh()
+        {
+            //Given
+            const int inputA = 128;
+            const int inputB = 128;
+
+            var adder = new DynamicAdder(8);
 
             //When
             adder.InputA.Set(inputA);

@@ -22,7 +22,7 @@ namespace LogicCircuit.Utilities
             var bitArray = new BitArray(pinSeries.Length);
             for(var i=0; i<pinSeries.Length; i++)
             {
-                bitArray[pinSeries.Length-1-i] = pinSeries[i];
+                bitArray[i] = pinSeries[i];
             }
 
             //Thanks SO

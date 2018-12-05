@@ -37,8 +37,8 @@ namespace LogicCircuit.Test.Utilities
             //Given
             const int expectedValue = 0b00110110;
             var pinSeries = new PinSeries(
-                GetPin(false), GetPin(false), GetPin(true), GetPin(true), 
-                GetPin(false), GetPin(true), GetPin(true), GetPin(false)
+                GetPin(false), GetPin(true), GetPin(true), GetPin(false), 
+                GetPin(true), GetPin(true), GetPin(false), GetPin(false)
             );
 
             //When

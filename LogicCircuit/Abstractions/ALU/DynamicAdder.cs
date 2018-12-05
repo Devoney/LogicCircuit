@@ -1,10 +1,15 @@
 ﻿using LogicCircuit.Alu;
 using LogicCircuit.Infrastructure;
-using System.Collections.Generic;
 
 namespace LogicCircuit.Abstractions.ALU
 {
-    public abstract class AdderBase
+    /// <summary>
+    /// This class creates its circuits depending on constructor arguments.
+    /// It is here to provide flexibility when playing around with different N-bit adders.
+    /// To not have a concrete instance for each N-bit adder desired.
+    /// For a correctly simulated circuit of an adder, see the Adder8Bit which is a 8-bit adder.
+    /// </summary>
+    public class DynamicAdder
     {
         private readonly FullAdder[] fullAdders;
 
@@ -14,7 +19,7 @@ namespace LogicCircuit.Abstractions.ALU
         public PinSeries Sum { get; private set; }
         public Pin Overflow { get; private set; }
 
-        protected AdderBase(int bits)
+        public DynamicAdder(int bits)
         {
             fullAdders = new FullAdder[bits];
             var inputPinSeriesA = new Pin[bits];
@@ -22,26 +27,24 @@ namespace LogicCircuit.Abstractions.ALU
             var outputPinSeriesSum = new Pin[bits];
 
             FullAdder previousFullAdder = null;
-            for (var i=bits-1; i >= 0; i--)
+            for (var i=0; i<bits; i++)
             {
                 var fullAdder = new FullAdder();
-                if(Overflow == null)
-                {
-                    Overflow = fullAdder.CarryOver;
-                }
 
                 if (previousFullAdder != null)
                 {
-                    fullAdder.CarryOver.ConnectTo(previousFullAdder.CarryIn);
+                    previousFullAdder.CarryOver.ConnectTo(fullAdder.CarryIn);
                 }
 
                 fullAdders[i] = fullAdder;
                 inputPinSeriesA[i] = fullAdder.InputA;
                 inputPinSeriesB[i] = fullAdder.InputB;
-                outputPinSeriesSum[bits-1-i] = fullAdder.Sum;
+                outputPinSeriesSum[i] = fullAdder.Sum;
 
                 previousFullAdder = fullAdder;
             }
+
+            Overflow = previousFullAdder.CarryOver;
 
             InputA = new PinSeries(inputPinSeriesA);
             InputB = new PinSeries(inputPinSeriesB);
