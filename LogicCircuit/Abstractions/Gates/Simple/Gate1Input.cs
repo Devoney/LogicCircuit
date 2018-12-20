@@ -7,7 +7,13 @@ namespace LogicCircuit.Abstractions.Gates.Simple
         public Pin InputA { get; protected set; }
 
         protected Gate1Input(string name = null)
-            : base(name)
+            : this(false, name)
+        {
+
+        }
+
+        protected Gate1Input(bool initialOutputState, string name = null)
+            :base(initialOutputState, name)
         {
             InputA = new Pin(this, "InputA");
             InputA.StateChanged += OnInputChanged;

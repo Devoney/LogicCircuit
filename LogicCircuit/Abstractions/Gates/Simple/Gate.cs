@@ -8,10 +8,16 @@ namespace LogicCircuit.Abstractions.Gates.Simple
         public string Name { get; set; }
         public Pin Output { get; protected set; }
 
-        public Gate(string name = null)
+        public Gate(bool initialOutputState, string name = null)
         {
             Name = name;
-            Output = new Pin(this, "Output");
+            Output = new Pin(this, true, initialOutputState,  "Output"); //BUG: It is actually an Ouput, but cannot be set...
+        }
+
+        public Gate(string name = null)
+            :this(false, name)
+        {
+            
         }
 
         protected abstract bool Operation();

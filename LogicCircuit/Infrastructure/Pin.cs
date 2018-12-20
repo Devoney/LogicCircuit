@@ -20,7 +20,6 @@ namespace LogicCircuit.Infrastructure
             }
             set
             {
-                if (IsOutput) throw new InvalidOperationException("Can not set output pins.");
                 if (_state != value)
                 {
                     _state = value;
@@ -49,6 +48,14 @@ namespace LogicCircuit.Infrastructure
             IsOutput = isOutput;
             Name = name;
             Gate = gate;
+        }
+
+        public Pin(Gate gate, bool isOutput, bool initialState, string name = null)
+        {
+            IsOutput = isOutput;
+            Name = name;
+            Gate = gate;
+            _state = initialState;
         }
 
         public void ConnectTo(Pin pin)

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using LogicCircuit.Alu;
+using LogicCircuit.Alu.Subtract;
 using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -11,6 +12,32 @@ namespace LogicCircuit.Test
     [TestClass]
     public class AluTest
     {
+        [TestMethod, TestCategory("ALU.Subtracter")]
+        public void HalfSubtracterSubtractsCorrectly()
+        {
+            //Given
+            var halfSubtracter = new HalfSubtracter();
+
+            var table = new List<bool4>
+            {
+                new bool4(false, false, false, false),
+                new bool4(false, true, true, true),
+                new bool4(true, false, true, false),
+                new bool4(true, true, false, false),
+            };
+
+            foreach (var t in table)
+            {
+                //When
+                halfSubtracter.InputA.State = t.Item1;
+                halfSubtracter.InputB.State = t.Item2;
+
+                //Then
+                halfSubtracter.Sub.State.Should().Be(t.Item3);
+                halfSubtracter.CarryOver.State.Should().Be(t.Item4);
+            }
+        }
+
         [TestMethod, TestCategory("ALU.Adder")]
         public void HalfAdderSumsCorrectly()
         {
