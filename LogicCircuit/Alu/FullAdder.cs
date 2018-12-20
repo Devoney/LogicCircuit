@@ -9,12 +9,12 @@ namespace LogicCircuit.Alu
         private readonly HalfAdder halfAdder2 = new HalfAdder();
         private readonly OR or = new OR();
 
-        public Pin InputA { get; private set; }
-        public Pin InputB { get; private set; }
-        public Pin CarryIn { get; private set; }
+        public InputPin InputA { get; private set; }
+        public InputPin InputB { get; private set; }
+        public InputPin CarryIn { get; private set; }
 
-        public Pin CarryOver { get; private set; }
-        public Pin Sum { get; private set; }
+        public OutputPin CarryOver { get; private set; }
+        public OutputPin Sum { get; private set; }
 
         public FullAdder()
         {

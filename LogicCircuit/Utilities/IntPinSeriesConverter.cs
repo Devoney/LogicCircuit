@@ -1,23 +1,24 @@
 ﻿using LogicCircuit.Infrastructure;
 using System;
 using System.Collections;
+using LogicCircuit.Abstractions.Infrastructure;
 
 namespace LogicCircuit.Utilities
 {
     public static class IntPinSeriesConverter
     {
-        public static void Set(this PinSeries pinSeries, int value)
+        public static void Set(this InputPinSeries inputPinSeries, int value)
         {
             //Thanks SO
             //https://stackoverflow.com/questions/6758196/convert-int-to-a-bit-array-in-net
             var bitArray = new BitArray(BitConverter.GetBytes(value));
-            for(var i=0; i<pinSeries.Length; i++)
+            for(var i=0; i<inputPinSeries.Length; i++)
             {
-                pinSeries[i] = bitArray[i];
+                inputPinSeries[i] = bitArray[i];
             }
         }
 
-        public static int Read(this PinSeries pinSeries)
+        public static int Read(this IReadablePinSeries pinSeries)
         {
             var bitArray = new BitArray(pinSeries.Length);
             for(var i=0; i<pinSeries.Length; i++)

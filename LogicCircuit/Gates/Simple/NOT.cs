@@ -3,9 +3,9 @@
     public class NOT : Abstractions.Gates.Simple.Gate1Input
     {
         public NOT(string name = null)
-            : base(true, name)
+            : base(name)
         {
-            
+            Output.SetState();
         }
 
         protected override bool Operation()

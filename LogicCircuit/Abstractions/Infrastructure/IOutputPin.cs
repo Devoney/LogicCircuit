@@ -1,7 +1,7 @@
 ﻿namespace LogicCircuit.Abstractions.Infrastructure
 {
-    public interface IPin
+    public interface IOutputPin
     {
-        bool State { get; set; }
+        bool State { get; }
     }
 }

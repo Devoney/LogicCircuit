@@ -9,9 +9,9 @@ namespace LogicCircuit.Gates.Composite
         private readonly AND and = new AND();
         private readonly NOT not = new NOT();
 
-        public Pin InputA { get { return and.InputA; } }
-        public Pin InputB { get { return and.InputB; } }
-        public Pin Output { get { return not.Output; } }
+        public InputPin InputA { get { return and.InputA; } }
+        public InputPin InputB { get { return and.InputB; } }
+        public OutputPin Output { get { return not.Output; } }
 
         public NAND()
         {

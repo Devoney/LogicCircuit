@@ -15,11 +15,11 @@ namespace LogicCircuit.Alu.Subtract
         private readonly AND and = new AND();
         private readonly XOR xor = new XOR();
 
-        public Pin InputA { get { return not.InputA; } }
-        public Pin InputB { get { return xor.InputB; } }
+        public InputPin InputA { get { return not.InputA; } }
+        public InputPin InputB { get { return xor.InputB; } }
 
-        public Pin CarryOver { get { return and.Output; } }
-        public Pin Sub { get { return xor.Output; } }
+        public OutputPin CarryOver { get { return and.Output; } }
+        public OutputPin Sub { get { return xor.Output; } }
 
         public HalfSubtracter()
         {

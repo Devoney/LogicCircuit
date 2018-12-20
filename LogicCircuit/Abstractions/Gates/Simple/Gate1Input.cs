@@ -4,18 +4,12 @@ namespace LogicCircuit.Abstractions.Gates.Simple
 {
     public abstract class Gate1Input : Gate
     {
-        public Pin InputA { get; protected set; }
+        public InputPin InputA { get; protected set; }
 
         protected Gate1Input(string name = null)
-            : this(false, name)
+            :base(name)
         {
-
-        }
-
-        protected Gate1Input(bool initialOutputState, string name = null)
-            :base(initialOutputState, name)
-        {
-            InputA = new Pin(this, "InputA");
+            InputA = new InputPin(this, "InputA");
             InputA.StateChanged += OnInputChanged;
             InputA.Connected += OnInputChanged;
         }

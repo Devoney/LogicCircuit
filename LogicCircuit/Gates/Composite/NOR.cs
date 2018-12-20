@@ -9,9 +9,9 @@ namespace LogicCircuit.Gates.Composite
         private readonly OR or = new OR();
         private readonly NOT not = new NOT();
 
-        public Pin InputA => or.InputA;
-        public Pin InputB => or.InputB;
-        public Pin Output => not.Output;
+        public InputPin InputA => or.InputA;
+        public InputPin InputB => or.InputB;
+        public OutputPin Output => not.Output;
 
         public NOR()
         {

@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\Infrastructure\IInputPin.cs" />
+    <Compile Include="Abstractions\Infrastructure\IReadablePinSeries.cs" />
     <Compile Include="Alu\DynamicAdder.cs" />
     <Compile Include="Abstractions\Gates\IInput2Output1.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate.cs" />
@@ -59,12 +61,13 @@
     <Compile Include="Gates\Composite\NOR.cs" />
     <Compile Include="Gates\Composite\XNOR.cs" />
     <Compile Include="Gates\Simple\AND.cs" />
-    <Compile Include="Abstractions\Infrastructure\IPin.cs" />
+    <Compile Include="Abstractions\Infrastructure\IOutputPin.cs" />
+    <Compile Include="Infrastructure\OutputPinSeries.cs" />
     <Compile Include="Infrastructure\Junction.cs" />
     <Compile Include="Gates\Simple\NOT.cs" />
     <Compile Include="Gates\Simple\OR.cs" />
     <Compile Include="Infrastructure\Pin.cs" />
-    <Compile Include="Infrastructure\PinSeries.cs" />
+    <Compile Include="Infrastructure\InputPinSeries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Gates\Composite\XOR.cs" />
     <Compile Include="Utilities\IntPinSeriesConverter.cs" />

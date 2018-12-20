@@ -2,13 +2,13 @@
 
 namespace LogicCircuit.Infrastructure
 {
-    public class PinSeries
+    public class OutputPinSeries : IReadablePinSeries
     {
-        private readonly IPin[] pins;
+        private readonly IOutputPin[] pins;
 
-        public readonly int Length;
+        public int Length { get; private set; }
 
-        public PinSeries(params IPin[] pins)
+        public OutputPinSeries(params IOutputPin[] pins)
         {
             this.pins = pins;
             Length = pins.Length;
@@ -17,7 +17,6 @@ namespace LogicCircuit.Infrastructure
         public bool this[int index]
         {
             get { return pins[index].State; }
-            set { pins[index].State = value; }
         }
     }
 }

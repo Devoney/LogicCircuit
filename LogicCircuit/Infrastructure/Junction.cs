@@ -6,39 +6,93 @@ namespace LogicCircuit.Infrastructure
 {
     public class Junction
     {
+        private OutputPin outputPin;
+        private List<InputPin> inputPins = new List<InputPin>();
         private List<Pin> pins = new List<Pin>();
 
-        public IReadOnlyList<Pin> Pins
+        public void Add(InputPin pin)
         {
-            get
-            {
-                return pins;
-            }
+            if (inputPins.Contains(pin)) return;
+            inputPins.Add(pin);
+            AddInternal((Pin)pin);
+            ChangeJunctionStateByPin(pin);
+        }
+
+        public void Add(OutputPin pin)
+        {
+            if (outputPin != null) throw new InvalidOperationException("Only one output pin is allowed per junction, and it has already been set.");
+            outputPin = pin;
+            AddInternal(pin);
+            ChangeJunctionStateByPin(pin);
         }
 
         public void Add(Pin pin)
         {
+            var inputPin = pin as InputPin;
+            if (inputPin != null)
+            {
+                Add(inputPin);
+                return;
+            }
+
+            var outputPin = pin as OutputPin;
+            if (outputPin != null)
+            {
+                Add(outputPin);
+                return;
+            }
+
+            throw new InvalidOperationException("Unknown pin type.");
+        }
+
+        private void AddInternal(Pin pin)
+        {
             if (pins.Contains(pin)) return;
             pin.StateChanged += Pin_StateChanged;
             pins.Add(pin);
-            ChangeJunctionStateByPin(pin);
         }
 
         private void Pin_StateChanged(object sender, EventArgs e)
         {
-            var pin = sender as Pin;
-            ChangeJunctionStateByPin(pin);
+            var inputPin = sender as InputPin;
+            if (inputPin != null)
+            {
+                ChangeJunctionStateByPin(inputPin);
+                return;
+            }
+
+            var outputPin = sender as OutputPin;
+            if (outputPin != null)
+            {
+                ChangeJunctionStateByPin(outputPin);
+                return;
+            }
+
+            throw new InvalidOperationException("Unknown pin type.");
         }
 
-        private void ChangeJunctionStateByPin(Pin pin)
+        private void ChangeJunctionStateByPin(InputPin pin)
         {
-            var allHigh = pins.Any(p => p.IsOutput && p.State);
+            var allHigh = AllHigh();
             if (allHigh) pin.State = true;
-            foreach (var p in pins)
+            foreach (var p in inputPins)
             {
                 if (p == pin) continue;
                 p.State = allHigh || pin.State;
             }
+        }
+
+        private void ChangeJunctionStateByPin(OutputPin pin)
+        {
+            foreach (var p in inputPins)
+            {
+                p.State = pin;
+            }
+        }
+
+        private bool AllHigh()
+        {
+            return outputPin != null && outputPin.State;
         }
     }
 }

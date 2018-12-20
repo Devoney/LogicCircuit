@@ -14,9 +14,9 @@ namespace LogicCircuit.Gates.Composite
         private readonly XOR xor = new XOR();
         private readonly NOT not = new NOT();
 
-        public Pin InputA => xor.InputA;
-        public Pin InputB => xor.InputB;
-        public Pin Output => not.Output;
+        public InputPin InputA => xor.InputA;
+        public InputPin InputB => xor.InputB;
+        public OutputPin Output => not.Output;
         
         public XNOR()
         {

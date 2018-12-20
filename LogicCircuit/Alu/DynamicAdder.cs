@@ -13,18 +13,18 @@ namespace LogicCircuit.Alu
     {
         private readonly FullAdder[] fullAdders;
 
-        public PinSeries InputA { get; private set; }
-        public PinSeries InputB { get; private set; }
+        public InputPinSeries InputA { get; private set; }
+        public InputPinSeries InputB { get; private set; }
 
-        public PinSeries Sum { get; private set; }
-        public Pin Overflow { get; private set; }
+        public OutputPinSeries Sum { get; private set; }
+        public OutputPin Overflow { get; private set; }
 
         public DynamicAdder(int bits)
         {
             fullAdders = new FullAdder[bits];
-            var inputPinSeriesA = new Pin[bits];
-            var inputPinSeriesB = new Pin[bits];
-            var outputPinSeriesSum = new Pin[bits];
+            var inputPinSeriesA = new InputPin[bits];
+            var inputPinSeriesB = new InputPin[bits];
+            var outputPinSeriesSum = new OutputPin[bits];
 
             FullAdder previousFullAdder = null;
             for (var i=0; i<bits; i++)
@@ -46,9 +46,9 @@ namespace LogicCircuit.Alu
 
             Overflow = previousFullAdder.CarryOver;
 
-            InputA = new PinSeries(inputPinSeriesA);
-            InputB = new PinSeries(inputPinSeriesB);
-            Sum = new PinSeries(outputPinSeriesSum);
+            InputA = new InputPinSeries(inputPinSeriesA);
+            InputB = new InputPinSeries(inputPinSeriesB);
+            Sum = new OutputPinSeries(outputPinSeriesSum);
         }
     }
 }

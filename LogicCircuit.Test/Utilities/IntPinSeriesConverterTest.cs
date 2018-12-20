@@ -15,7 +15,7 @@ namespace LogicCircuit.Test.Utilities
         {
             //Given
             const int intValue = 0b00110110;
-            var pinSeries = new PinSeries(GetPin(), GetPin(), GetPin(), GetPin(), GetPin(), GetPin(), GetPin(), GetPin());
+            var pinSeries = new InputPinSeries(GetInputPin(), GetInputPin(), GetInputPin(), GetInputPin(), GetInputPin(), GetInputPin(), GetInputPin(), GetInputPin());
 
             //When
             pinSeries.Set(intValue);
@@ -36,9 +36,9 @@ namespace LogicCircuit.Test.Utilities
         {
             //Given
             const int expectedValue = 0b00110110;
-            var pinSeries = new PinSeries(
-                GetPin(false), GetPin(true), GetPin(true), GetPin(false), 
-                GetPin(true), GetPin(true), GetPin(false), GetPin(false)
+            var pinSeries = new InputPinSeries(
+                GetInputPin(false), GetInputPin(true), GetInputPin(true), GetInputPin(false), 
+                GetInputPin(true), GetInputPin(true), GetInputPin(false), GetInputPin(false)
             );
 
             //When
@@ -48,9 +48,9 @@ namespace LogicCircuit.Test.Utilities
             actualValue.Should().Be(expectedValue);
         }
 
-        private IPin GetPin(bool state = false)
+        private IInputPin GetInputPin(bool state = false)
         {
-            var pinMock = new Mock<IPin>();
+            var pinMock = new Mock<IInputPin>();
             pinMock.SetupProperty(p => p.State);
             var pin = pinMock.Object;
             pin.State = state;

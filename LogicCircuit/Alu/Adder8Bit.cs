@@ -13,20 +13,20 @@ namespace LogicCircuit.Alu
         private readonly FullAdder fullAdder7 = new FullAdder();
         private readonly FullAdder fullAdder8 = new FullAdder();
 
-        public PinSeries InputA { get; private set; }
-        public PinSeries InputB { get; private set; }
-        public PinSeries Sum { get; private set; }
-        public Pin Overflow { get; private set; }
+        public InputPinSeries InputA { get; private set; }
+        public InputPinSeries InputB { get; private set; }
+        public OutputPinSeries Sum { get; private set; }
+        public OutputPin Overflow { get; private set; }
 
         public Adder8Bit()
         {
-            InputA = new PinSeries(fullAdder1.InputA, fullAdder2.InputA, fullAdder3.InputA, fullAdder4.InputA,
+            InputA = new InputPinSeries(fullAdder1.InputA, fullAdder2.InputA, fullAdder3.InputA, fullAdder4.InputA,
                 fullAdder5.InputA, fullAdder6.InputA, fullAdder7.InputA, fullAdder8.InputA);
 
-            InputB = new PinSeries(fullAdder1.InputB, fullAdder2.InputB, fullAdder3.InputB, fullAdder4.InputB,
+            InputB = new InputPinSeries(fullAdder1.InputB, fullAdder2.InputB, fullAdder3.InputB, fullAdder4.InputB,
                 fullAdder5.InputB, fullAdder6.InputB, fullAdder7.InputB, fullAdder8.InputB);
 
-            Sum = new PinSeries(fullAdder1.Sum, fullAdder2.Sum, fullAdder3.Sum, fullAdder4.Sum,
+            Sum = new OutputPinSeries(fullAdder1.Sum, fullAdder2.Sum, fullAdder3.Sum, fullAdder4.Sum,
                 fullAdder5.Sum, fullAdder6.Sum, fullAdder7.Sum, fullAdder8.Sum);
 
             fullAdder1.CarryOver.ConnectTo(fullAdder2.CarryIn);

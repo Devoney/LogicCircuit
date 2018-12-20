@@ -4,30 +4,70 @@ using System;
 
 namespace LogicCircuit.Infrastructure
 {
-    public class Pin : IPin
+    public class OutputPin : Pin, IOutputPin
     {
-        public event EventHandler StateChanged;
-        public event EventHandler Connected;
+        private readonly Func<bool> setPinOperation;
 
-        public bool IsOutput { get; private set; }
-
-        private bool _state;
         public bool State
         {
             get
             {
-                return _state;
+                return state;
             }
-            set
+            private set
             {
-                if (_state != value)
+                if (state != value)
                 {
-                    _state = value;
+                    state = value;
                     OnStateChanged();
                 }
             }
         }
 
+        public OutputPin(Gate gate, Func<bool> setPinOperation, string name = null)
+            :base(gate, name)
+        {
+            this.setPinOperation = setPinOperation;
+        }
+
+        public void SetState()
+        {
+            State = setPinOperation();
+        }
+    }
+
+    public class InputPin : Pin, IInputPin
+    {
+        public bool State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if (state != value)
+                {
+                    state = value;
+                    OnStateChanged();
+                }
+            }
+        }
+
+        public InputPin(Gate gate, string name = null)
+            :base(gate, name)
+        {
+
+        }
+    }
+
+    public abstract class Pin
+    {
+        public event EventHandler StateChanged;
+        public event EventHandler Connected;
+
+        protected bool state;
+        
         private Junction _junction;
 
         public Gate Gate
@@ -38,24 +78,9 @@ namespace LogicCircuit.Infrastructure
         public string Name { get; set; }
 
         public Pin(Gate gate, string name = null)
-            :this(gate, false, name)
         {
-
-        }
-
-        public Pin(Gate gate, bool isOutput, string name = null)
-        {
-            IsOutput = isOutput;
             Name = name;
             Gate = gate;
-        }
-
-        public Pin(Gate gate, bool isOutput, bool initialState, string name = null)
-        {
-            IsOutput = isOutput;
-            Name = name;
-            Gate = gate;
-            _state = initialState;
         }
 
         public void ConnectTo(Pin pin)
@@ -75,11 +100,11 @@ namespace LogicCircuit.Infrastructure
             }
         }
 
-        private void OnStateChanged()
+        protected void OnStateChanged()
         {
             if (!string.IsNullOrEmpty(Gate.Name) && !string.IsNullOrEmpty(Name))
             {
-                Console.WriteLine("Gate: " + Gate.Name + " - PIN: " + Name + " = " + State);
+                Console.WriteLine("Gate: " + Gate.Name + " - PIN: " + Name + " = " + state);
             }
             if (StateChanged == null) return;
             StateChanged(this, new EventArgs());
@@ -87,7 +112,7 @@ namespace LogicCircuit.Infrastructure
 
         public static implicit operator bool(Pin pin)
         {
-            return pin.State;
+            return pin.state;
         }
     }
 }

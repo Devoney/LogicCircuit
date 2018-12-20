@@ -11,9 +11,9 @@ namespace LogicCircuit.Gates.Composite
         private readonly NOT not = new NOT("XOR_NOT");
         private readonly AND outputAnd = new AND("XOR_AND_OUTPUT");
 
-        public Pin InputA { get { return or.InputA; } }
-        public Pin InputB { get { return or.InputB; } }
-        public Pin Output { get { return outputAnd.Output; } }
+        public InputPin InputA { get { return or.InputA; } }
+        public InputPin InputB { get { return or.InputB; } }
+        public OutputPin Output { get { return outputAnd.Output; } }
 
         public XOR()
         {
