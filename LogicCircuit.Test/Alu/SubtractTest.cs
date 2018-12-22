@@ -87,5 +87,25 @@ namespace LogicCircuit.Test.Alu
             actualSub.Should().Be(expectedSub);
             subtracter.Overflow.State.Should().BeFalse();
         }
+
+        [TestMethod, TestCategory("ALU.Subtracter")]
+        public void EightBitSubtracterSubsCorrectlySigned()
+        {
+            //Given
+            const int inputA = 23;
+            const int inputB = 56;
+            const int expectedSub = inputA - inputB;
+
+            var subtracter = new Subtracter8Bit();
+
+            //When
+            subtracter.InputA.Set(inputA);
+            subtracter.InputB.Set(inputB);
+
+            //Then
+            var actualSub = subtracter.Sub.Read<sbyte>();
+            actualSub.Should().Be(expectedSub);
+            subtracter.Overflow.State.Should().BeTrue();
+        }
     }
 }

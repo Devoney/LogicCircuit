@@ -20,6 +20,12 @@ namespace LogicCircuit.Utilities
 
         public static int Read(this IReadablePinSeries pinSeries)
         {
+            return Read<int>(pinSeries);
+        }
+
+        public static TIntegral Read<TIntegral>(this IReadablePinSeries pinSeries)
+            where TIntegral:struct
+        {
             var bitArray = new BitArray(pinSeries.Length);
             for(var i=0; i<pinSeries.Length; i++)
             {
@@ -29,7 +35,7 @@ namespace LogicCircuit.Utilities
             //Thanks SO
             //https://stackoverflow.com/questions/5283180/how-can-i-convert-bitarray-to-single-int
 
-            int[] array = new int[1];
+            TIntegral[] array = new TIntegral[1];
             bitArray.CopyTo(array, 0);
             return array[0];
         }
