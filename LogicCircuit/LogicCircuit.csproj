@@ -48,14 +48,14 @@
   <ItemGroup>
     <Compile Include="Abstractions\Infrastructure\IInputPin.cs" />
     <Compile Include="Abstractions\Infrastructure\IReadablePinSeries.cs" />
-    <Compile Include="Alu\DynamicAdder.cs" />
+    <Compile Include="Alu\Add\DynamicAdder.cs" />
     <Compile Include="Abstractions\Gates\IInput2Output1.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate1Input.cs" />
     <Compile Include="Abstractions\Gates\Simple\Gate2Input.cs" />
-    <Compile Include="Alu\Adder8Bit.cs" />
-    <Compile Include="Alu\FullAdder.cs" />
-    <Compile Include="Alu\HalfAdder.cs" />
+    <Compile Include="Alu\Add\Adder8Bit.cs" />
+    <Compile Include="Alu\Add\FullAdder.cs" />
+    <Compile Include="Alu\Add\HalfAdder.cs" />
     <Compile Include="Alu\Subtract\Subtracter8Bit.cs" />
     <Compile Include="Alu\Subtract\FullSubtracter.cs" />
     <Compile Include="Alu\Subtract\HalfSubtracter.cs" />

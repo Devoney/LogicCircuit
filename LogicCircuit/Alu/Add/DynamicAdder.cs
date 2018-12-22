@@ -1,7 +1,7 @@
 ﻿using LogicCircuit.Alu;
 using LogicCircuit.Infrastructure;
 
-namespace LogicCircuit.Alu
+namespace LogicCircuit.Alu.Add
 {
     /// <summary>
     /// This class creates its circuits depending on constructor arguments.

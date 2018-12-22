@@ -2,7 +2,7 @@
 using LogicCircuit.Gates.Simple;
 using LogicCircuit.Infrastructure;
 
-namespace LogicCircuit.Alu
+namespace LogicCircuit.Alu.Add
 {
     public class HalfAdder
     {

@@ -1,6 +1,6 @@
 ﻿using LogicCircuit.Infrastructure;
 
-namespace LogicCircuit.Alu
+namespace LogicCircuit.Alu.Add
 {
     public class Adder8Bit
     {

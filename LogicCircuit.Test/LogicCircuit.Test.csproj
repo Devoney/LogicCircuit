@@ -70,7 +70,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AluTest.cs" />
+    <Compile Include="Alu\AddTest.cs" />
+    <Compile Include="Alu\SubtractTest.cs" />
     <Compile Include="Gates\CompositeTest.cs" />
     <Compile Include="Gates\SimpleTest.cs" />
     <Compile Include="Utilities\IntPinSeriesConverterTest.cs" />
