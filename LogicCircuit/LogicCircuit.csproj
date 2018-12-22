@@ -56,6 +56,7 @@
     <Compile Include="Alu\Adder8Bit.cs" />
     <Compile Include="Alu\FullAdder.cs" />
     <Compile Include="Alu\HalfAdder.cs" />
+    <Compile Include="Alu\Subtract\Subtracter8Bit.cs" />
     <Compile Include="Alu\Subtract\FullSubtracter.cs" />
     <Compile Include="Alu\Subtract\HalfSubtracter.cs" />
     <Compile Include="Gates\Composite\NAND.cs" />

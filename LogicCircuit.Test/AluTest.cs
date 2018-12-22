@@ -59,10 +59,10 @@ namespace LogicCircuit.Test
             foreach (var t in table)
             {
                 //When
-                fullAdder.InputA.State = t.Item1;
-                fullAdder.InputB.State = t.Item2;
-                fullAdder.CarryIn.State = t.Item3;
-
+                fullAdder.CarryIn.State = t.Item1;
+                fullAdder.InputA.State = t.Item2;
+                fullAdder.InputB.State = t.Item3;
+                
                 //Then
                 fullAdder.Sub.State.Should().Be(t.Item4);
                 fullAdder.CarryOver.State.Should().Be(t.Item5);
@@ -143,6 +143,26 @@ namespace LogicCircuit.Test
             var actualSum = adder.Sum.Read();
             actualSum.Should().Be(expectedSum);
             adder.Overflow.State.Should().BeFalse();
+        }
+
+        [TestMethod, TestCategory("ALU.Subtracter")]
+        public void EightBitSubtracterSubsCorrectly()
+        {
+            //Given
+            const int inputA = 56;
+            const int inputB = 23;
+            const int expectedSub = inputA - inputB;
+
+            var subtracter = new Subtracter8Bit();
+
+            //When
+            subtracter.InputA.Set(inputA);
+            subtracter.InputB.Set(inputB);
+
+            //Then
+            var actualSub = subtracter.Sub.Read();
+            actualSub.Should().Be(expectedSub);
+            subtracter.Overflow.State.Should().BeFalse();
         }
 
         [TestMethod, TestCategory("ALU.Adder")]
