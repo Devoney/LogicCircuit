@@ -20,6 +20,8 @@ namespace LogicCircuit.Infrastructure
 
         public void Add(OutputPin pin)
         {
+            if (pin == outputPin) return;
+
             if (outputPin != null) throw new InvalidOperationException("Only one output pin is allowed per junction, and it has already been set.");
             outputPin = pin;
             AddInternal(pin);

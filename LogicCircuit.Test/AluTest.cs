@@ -38,6 +38,37 @@ namespace LogicCircuit.Test
             }
         }
 
+        [TestMethod, TestCategory("ALU.Subtracter")]
+        public void FullSubtracterSubsCorrectly()
+        {
+            //Given
+            var fullAdder = new FullSubtracter();
+            var table = new List<bool5>
+            {
+                //        Cin,   Ina    Inb    Sub,    Cout
+                new bool5(false, false, false, false, false),
+                new bool5(false, false, true, true, true),
+                new bool5(false, true, false, true, false),
+                new bool5(false, true, true, false, false),
+                new bool5(true, false, false, true, true),
+                new bool5(true, false, true, false, true),
+                new bool5(true, true, false, false, false),
+                new bool5(true, true, true, true, true),
+            };
+
+            foreach (var t in table)
+            {
+                //When
+                fullAdder.InputA.State = t.Item1;
+                fullAdder.InputB.State = t.Item2;
+                fullAdder.CarryIn.State = t.Item3;
+
+                //Then
+                fullAdder.Sub.State.Should().Be(t.Item4);
+                fullAdder.CarryOver.State.Should().Be(t.Item5);
+            }
+        }
+
         [TestMethod, TestCategory("ALU.Adder")]
         public void HalfAdderSumsCorrectly()
         {
