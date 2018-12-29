@@ -61,29 +61,17 @@ namespace LogicCircuit.Test.Alu
         [TestMethod]
         public void ComparerComparesCorrectly()
         {
-            ComparerComparesCorrectly(false);
-        }
-
-        [TestMethod]
-        public void ComparerDoesNotOutputAnythingWhenTurnedOff()
-        {
-            ComparerComparesCorrectly(true);
-        }
-
-        public void ComparerComparesCorrectly(bool isOff)
-        {
             //Given
             var truthTable = new List<CompareInputOutput>
             {
-                new CompareInputOutput(false, false, isEqualTo: !isOff),
-                new CompareInputOutput(false, true, isLessThan: !isOff),
-                new CompareInputOutput(true, false, isGreaterThan: !isOff),
-                new CompareInputOutput(true, true, isEqualTo: !isOff),
+                new CompareInputOutput(false, false, isEqualTo: true),
+                new CompareInputOutput(false, true, isLessThan: true),
+                new CompareInputOutput(true, false, isGreaterThan: true),
+                new CompareInputOutput(true, true, isEqualTo: true),
             };
             var comparer = new Comparer();
-            comparer.IsOff.State = isOff;
 
-            foreach(var t in truthTable)
+            foreach (var t in truthTable)
             {
                 Trace.WriteLine(t);
 
@@ -94,7 +82,66 @@ namespace LogicCircuit.Test.Alu
                 //Then
                 comparer.IsLessThan.State.Should().Be(t.IsLessThan);
                 comparer.IsEqualTo.State.Should().Be(t.IsEqualTo);
-                comparer.IsGreaterThan.State.Should().Be(t.IsGreaterThan);              
+                comparer.IsGreaterThan.State.Should().Be(t.IsGreaterThan);
+            }
+        }
+
+        [TestMethod]
+        public void ChainableComparerPassesThroughInputCorrectyWhenSetToOff()
+        {
+            //Given
+            var chainableComparer = new ChainableComparer();
+            chainableComparer.IsOff.State = true;
+
+            var truthTable = new List<CompareInputOutput>
+            {
+                new CompareInputOutput(false, false, isLessThan: true),
+                new CompareInputOutput(false, true, isEqualTo: true),
+                new CompareInputOutput(true, false, isLessThan: true),
+                new CompareInputOutput(true, true, isGreaterThan: true)
+            };
+
+            foreach (var t in truthTable)
+            {
+                //When
+                chainableComparer.InputA.State = t.InputA;
+                chainableComparer.InputB.State = t.InputB;
+                chainableComparer.IsLessThanInput.State = t.IsLessThan;
+                chainableComparer.IsEqualToInput.State = t.IsEqualTo;
+                chainableComparer.IsGreaterThanInput.State = t.IsGreaterThan;
+
+                //Then
+                chainableComparer.IsLessThanOutput.State.Should().Be(t.IsLessThan);
+                chainableComparer.IsEqualToOutput.State.Should().Be(t.IsEqualTo);
+                chainableComparer.IsGreaterThanOutput.State.Should().Be(t.IsGreaterThan);
+            }
+        }
+
+        [TestMethod]
+        public void ChainableComparerComparesCorrectlyWhenNotSetToOff()
+        {
+            //Given
+            var truthTable = new List<CompareInputOutput>
+            {
+                new CompareInputOutput(false, false, isEqualTo: true),
+                new CompareInputOutput(false, true, isLessThan: true),
+                new CompareInputOutput(true, false, isGreaterThan: true),
+                new CompareInputOutput(true, true, isEqualTo: true),
+            };
+            var chainableComparer = new ChainableComparer();
+
+            foreach (var t in truthTable)
+            {
+                Trace.WriteLine(t);
+
+                //When
+                chainableComparer.InputA.State = t.InputA;
+                chainableComparer.InputB.State = t.InputB;
+
+                //Then
+                chainableComparer.IsLessThanOutput.State.Should().Be(t.IsLessThan);
+                chainableComparer.IsEqualToOutput.State.Should().Be(t.IsEqualTo);
+                chainableComparer.IsGreaterThanOutput.State.Should().Be(t.IsGreaterThan);
             }
         }
 
