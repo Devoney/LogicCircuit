@@ -61,15 +61,27 @@ namespace LogicCircuit.Test.Alu
         [TestMethod]
         public void ComparerComparesCorrectly()
         {
+            ComparerComparesCorrectly(false);
+        }
+
+        [TestMethod]
+        public void ComparerDoesNotOutputAnythingWhenTurnedOff()
+        {
+            ComparerComparesCorrectly(true);
+        }
+
+        public void ComparerComparesCorrectly(bool isOff)
+        {
             //Given
             var truthTable = new List<CompareInputOutput>
             {
-                new CompareInputOutput(false, false, isEqualTo: true),
-                new CompareInputOutput(false, true, isLessThan: true),
-                new CompareInputOutput(true, false, isGreaterThan: true),
-                new CompareInputOutput(true, true, isEqualTo: true),
+                new CompareInputOutput(false, false, isEqualTo: !isOff),
+                new CompareInputOutput(false, true, isLessThan: !isOff),
+                new CompareInputOutput(true, false, isGreaterThan: !isOff),
+                new CompareInputOutput(true, true, isEqualTo: !isOff),
             };
             var comparer = new Comparer();
+            comparer.IsOff.State = isOff;
 
             foreach(var t in truthTable)
             {
@@ -82,7 +94,7 @@ namespace LogicCircuit.Test.Alu
                 //Then
                 comparer.IsLessThan.State.Should().Be(t.IsLessThan);
                 comparer.IsEqualTo.State.Should().Be(t.IsEqualTo);
-                comparer.IsGreaterThan.State.Should().Be(t.IsGreaterThan);
+                comparer.IsGreaterThan.State.Should().Be(t.IsGreaterThan);              
             }
         }
 
