@@ -2,6 +2,7 @@
 using LogicCircuit.Alu.Compare;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Diagnostics;
 using bool3 = System.Tuple<bool, bool, bool>;
 
 namespace LogicCircuit.Test.Alu
@@ -54,6 +55,58 @@ namespace LogicCircuit.Test.Alu
 
                 //Then
                 greaterThan.Output.State.Should().Be(t.Item3);
+            }
+        }
+
+        [TestMethod]
+        public void ComparerComparesCorrectly()
+        {
+            //Given
+            var truthTable = new List<CompareInputOutput>
+            {
+                new CompareInputOutput(false, false, isEqualTo: true),
+                new CompareInputOutput(false, true, isLessThan: true),
+                new CompareInputOutput(true, false, isGreaterThan: true),
+                new CompareInputOutput(true, true, isEqualTo: true),
+            };
+            var comparer = new Comparer();
+
+            foreach(var t in truthTable)
+            {
+                Trace.WriteLine(t);
+
+                //When
+                comparer.InputA.State = t.InputA;
+                comparer.InputB.State = t.InputB;
+
+                //Then
+                comparer.IsLessThan.State.Should().Be(t.IsLessThan);
+                comparer.IsEqualTo.State.Should().Be(t.IsEqualTo);
+                comparer.IsGreaterThan.State.Should().Be(t.IsGreaterThan);
+            }
+        }
+
+        private class CompareInputOutput
+        {
+            public bool InputA { get; set; }
+            public bool InputB { get; set; }
+            public bool IsLessThan { get; set; }
+            public bool IsGreaterThan { get; set; }
+            public bool IsEqualTo { get; set; }
+
+            public CompareInputOutput(bool inputA, bool inputB, bool isLessThan = false, bool isGreaterThan = false, bool isEqualTo = false)
+            {
+                InputA = inputA;
+                InputB = inputB;
+                IsLessThan = isLessThan;
+                IsGreaterThan = isGreaterThan;
+                IsEqualTo = isEqualTo;
+            }
+
+            public override string ToString()
+            {
+                return $"{nameof(InputA)}: {InputA}, {nameof(InputB)}: {InputB}, " +
+                    $"{nameof(IsLessThan)}: {IsLessThan}, {nameof(IsEqualTo)}: {IsEqualTo}, {nameof(IsGreaterThan)}: {IsGreaterThan}"; 
             }
         }
     }
