@@ -1,7 +1,10 @@
 # LogicCircuit
 C# library that aims to emulate behavior of digital circuits in code.
 
-The reason I started writing the code is that the following: I want to figure out how a digital circuit can do certain operations, and be able to 'quickly' verify its behavior. With this library you can write components (consisting of logical gates) and 'quickly' verify that it gives the expected output, based on the given input (see the unit tests for instance).
+The reason I started writing the code is the following: I want to understand and fiddle with digital circuitry on how it does certain operations. Therefore I want to be able to 'quickly' verify the behavior of a circuit. With this library you can write components (consisting of logical gates) and 'quickly' verify that it gives the expected output, based on the given input (see the unit tests for instance).
+
+This is different from modeling a digital circuit in a simulator like https://www.circuitlab.com. This library contains no graphic modeller, but circuitlab does not provide a solution to easily test truth tables on the circuitry.
+
 All logic inside this library starts from the following basic operations in C#: **&&** (AND), **||** (OR) and **!** (NOT).
 The rest of all the circuits inside this repo solely chains these operation as building blocks in the form of objects. These objects represent gates, and more complex digital components. Just like digital electronic circuits would.
 
