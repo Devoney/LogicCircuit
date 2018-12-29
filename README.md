@@ -44,4 +44,5 @@ So far it contains the following gates and components. Each is covered by unit t
 1. Less than
 2. Greater than
    (Notice that a NXOR is equivalent to 'N equials N' operation.)
-3. Comparer
+3. Comparer (and ChainableComparer: used for making multi-bit comparers).
+4. 8-bit comparer

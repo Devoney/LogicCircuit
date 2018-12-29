@@ -1,6 +1,9 @@
 ﻿using FluentAssertions;
 using LogicCircuit.Alu.Compare;
+using LogicCircuit.Infrastructure;
+using LogicCircuit.Utilities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using bool3 = System.Tuple<bool, bool, bool>;
@@ -91,12 +94,12 @@ namespace LogicCircuit.Test.Alu
         {
             //Given
             var chainableComparer = new ChainableComparer();
-            chainableComparer.IsOff.State = true;
+            chainableComparer.IsOn.State = false;
 
             var truthTable = new List<CompareInputOutput>
             {
                 new CompareInputOutput(false, false, isLessThan: true),
-                new CompareInputOutput(false, true, isEqualTo: true),
+                new CompareInputOutput(false, true),
                 new CompareInputOutput(true, false, isLessThan: true),
                 new CompareInputOutput(true, true, isGreaterThan: true)
             };
@@ -107,7 +110,6 @@ namespace LogicCircuit.Test.Alu
                 chainableComparer.InputA.State = t.InputA;
                 chainableComparer.InputB.State = t.InputB;
                 chainableComparer.IsLessThanInput.State = t.IsLessThan;
-                chainableComparer.IsEqualToInput.State = t.IsEqualTo;
                 chainableComparer.IsGreaterThanInput.State = t.IsGreaterThan;
 
                 //Then
@@ -118,7 +120,7 @@ namespace LogicCircuit.Test.Alu
         }
 
         [TestMethod]
-        public void ChainableComparerComparesCorrectlyWhenNotSetToOff()
+        public void ChainableComparerComparesCorrectlyWhenSetToOn()
         {
             //Given
             var truthTable = new List<CompareInputOutput>
@@ -129,6 +131,7 @@ namespace LogicCircuit.Test.Alu
                 new CompareInputOutput(true, true, isEqualTo: true),
             };
             var chainableComparer = new ChainableComparer();
+            chainableComparer.IsOn.State = true;
 
             foreach (var t in truthTable)
             {
@@ -145,18 +148,60 @@ namespace LogicCircuit.Test.Alu
             }
         }
 
-        private class CompareInputOutput
+        [TestMethod]
+        public void EightBitComparerComparesCorrectly()
+        {
+            //Given
+            var comparer = new Comparer8Bit();
+            var table = new List<Tuple<int, int, CompareOutput>>
+            {
+                new Tuple<int, int, CompareOutput>(45, 78, new CompareOutput(isLessThan: true)),
+                new Tuple<int, int, CompareOutput>(0, 0, new CompareOutput(isEqualTo: true)),
+                new Tuple<int, int, CompareOutput>(55, 55, new CompareOutput(isEqualTo: true)),
+                new Tuple<int, int, CompareOutput>(255, 255, new CompareOutput(isEqualTo: true)),
+                new Tuple<int, int, CompareOutput>(98, 12, new CompareOutput(isGreaterThan: true))
+            };
+
+            foreach(var t in table)
+            {
+                //When
+                comparer.InputA.Set(t.Item1);
+                comparer.InputB.Set(t.Item2);
+
+                //Then
+                comparer.IsLessThan.State.Should().Be(t.Item3.IsLessThan);
+                comparer.IsEqualTo.State.Should().Be(t.Item3.IsEqualTo);
+                comparer.IsGreaterThan.State.Should().Be(t.Item3.IsGreaterThan);
+            }
+        }
+
+        private class CompareInputOutput : CompareOutput
         {
             public bool InputA { get; set; }
             public bool InputB { get; set; }
+
+            public CompareInputOutput(bool inputA, bool inputB, bool isLessThan = false, bool isGreaterThan = false, bool isEqualTo = false)
+                :base(isLessThan, isGreaterThan, isEqualTo)
+            {
+                InputA = inputA;
+                InputB = inputB;
+            }
+
+            public override string ToString()
+            {
+                return $"{nameof(InputA)}: {InputA}, {nameof(InputB)}: {InputB}, " +
+                    base.ToString(); 
+            }
+        }
+
+        private class CompareOutput
+        {
             public bool IsLessThan { get; set; }
             public bool IsGreaterThan { get; set; }
             public bool IsEqualTo { get; set; }
 
-            public CompareInputOutput(bool inputA, bool inputB, bool isLessThan = false, bool isGreaterThan = false, bool isEqualTo = false)
+            public CompareOutput(bool isLessThan = false, bool isGreaterThan = false, bool isEqualTo = false)
             {
-                InputA = inputA;
-                InputB = inputB;
                 IsLessThan = isLessThan;
                 IsGreaterThan = isGreaterThan;
                 IsEqualTo = isEqualTo;
@@ -164,8 +209,7 @@ namespace LogicCircuit.Test.Alu
 
             public override string ToString()
             {
-                return $"{nameof(InputA)}: {InputA}, {nameof(InputB)}: {InputB}, " +
-                    $"{nameof(IsLessThan)}: {IsLessThan}, {nameof(IsEqualTo)}: {IsEqualTo}, {nameof(IsGreaterThan)}: {IsGreaterThan}"; 
+                return $"{nameof(IsLessThan)}: {IsLessThan}, {nameof(IsEqualTo)}: {IsEqualTo}, {nameof(IsGreaterThan)}: {IsGreaterThan}";
             }
         }
     }

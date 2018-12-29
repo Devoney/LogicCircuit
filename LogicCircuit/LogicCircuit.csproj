@@ -58,6 +58,7 @@
     <Compile Include="Alu\Add\HalfAdder.cs" />
     <Compile Include="Alu\Compare\ChainableComparer.cs" />
     <Compile Include="Alu\Compare\Comparer.cs" />
+    <Compile Include="Alu\Compare\Comparer8Bit.cs" />
     <Compile Include="Alu\Compare\GreaterThan.cs" />
     <Compile Include="Alu\Compare\LessThan.cs" />
     <Compile Include="Alu\Subtract\Subtracter8Bit.cs" />
