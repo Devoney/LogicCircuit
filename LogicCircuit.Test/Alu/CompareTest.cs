@@ -26,10 +26,34 @@ namespace LogicCircuit.Test.Alu
             {
                 //When
                 lessThan.InputA.State = t.Item1;
-                lessThan.inputB.State = t.Item2;
+                lessThan.InputB.State = t.Item2;
 
                 //Then
                 lessThan.Output.State.Should().Be(t.Item3);
+            }
+        }
+
+        [TestMethod]
+        public void GreaterThanComparesCorrectly()
+        {
+            //Given
+            var greaterThan = new GreaterThan();
+            var table = new List<bool3>
+            {
+                new bool3(false, false, false),
+                new bool3(false, true, false),
+                new bool3(true, false, true),
+                new bool3(true, true, false),
+            };
+
+            foreach (var t in table)
+            {
+                //When
+                greaterThan.InputA.State = t.Item1;
+                greaterThan.InputB.State = t.Item2;
+
+                //Then
+                greaterThan.Output.State.Should().Be(t.Item3);
             }
         }
     }
