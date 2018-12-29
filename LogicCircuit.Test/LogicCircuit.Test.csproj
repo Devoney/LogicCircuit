@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alu\AddTest.cs" />
+    <Compile Include="Alu\CompareTest.cs" />
     <Compile Include="Alu\SubtractTest.cs" />
     <Compile Include="Gates\CompositeTest.cs" />
     <Compile Include="Gates\SimpleTest.cs" />
